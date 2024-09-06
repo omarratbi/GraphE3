@@ -128,6 +128,7 @@ export class ForceGraph implements IVisual {
 
     private static ImagePosition: number = -12;
     private static MinNodeWeight: number = 5;
+    private static MaxNodeWeight: number = 5;
     private static MinCharge: number = -100;
     private static MaxCharge: number = -0.1;
     private static MinDecimalPlaces: number = 0;
@@ -247,26 +248,26 @@ export class ForceGraph implements IVisual {
 
         this.forceLayout = d3.layout.force<ForceGraphLink, ForceGraphNode>();
 
-        this.forceLayout.drag()
-            .on("dragstart", ((d: ForceGraphNode) => {
-                this.forceLayout.stop();
-                d.isDrag = true;
-                this.fadeNode(d);
-            }))
-            .on("dragend", ((d: ForceGraphNode) => {
-                this.forceLayout.tick();
-                this.forceLayout.resume();
-                d.isDrag = false;
-                this.fadeNode(d);
-            }))
-            .on("drag", (d: ForceGraphNode) => {
-                d.px += (d3.event as any).dx;
-                d.py += (d3.event as any).dy;
-                d.x += (d3.event as any).dx;
-                d.y += (d3.event as any).dy;
-                this.fadeNode(d);
-                this.forceLayout.tick();
-            });
+        // this.forceLayout.drag()
+        //     .on("dragstart", ((d: ForceGraphNode) => {
+        //         this.forceLayout.stop();
+        //         d.isDrag = true;
+        //         this.fadeNode(d);
+        //     }))
+        //     .on("dragend", ((d: ForceGraphNode) => {
+        //         this.forceLayout.tick();
+        //         this.forceLayout.resume();
+        //         d.isDrag = false;
+        //         this.fadeNode(d);
+        //     }))
+        //     .on("drag", (d: ForceGraphNode) => {
+        //         d.px += (d3.event as any).dx;
+        //         d.py += (d3.event as any).dy;
+        //         d.x += (d3.event as any).dx;
+        //         d.y += (d3.event as any).dy;
+        //         this.fadeNode(d);
+        //         this.forceLayout.tick();
+        //     });
 
         const svg: d3.Selection<any> = root
             .append("svg")
@@ -646,6 +647,7 @@ export class ForceGraph implements IVisual {
                     return this.getLinkColor(link, colorPalette, colorHelper);
                 }
             })
+            .style('border-style', this.settings.links.styleLink)
             .on("mouseover", () => {
 
                 return this.fadePath(
@@ -665,6 +667,7 @@ export class ForceGraph implements IVisual {
         this.tooltipServiceWrapper.addTooltip(this.paths, (eventArgs: TooltipEventArgs<ForceGraphLink>) => {
             return eventArgs.data.tooltipInfo;
         });
+        // aggiunta tooltip
 
         if (this.settings.links.showLabel) {
             let linklabelholderUpdate: d3.selection.Update<ForceGraphLink> = svg
@@ -707,7 +710,6 @@ export class ForceGraph implements IVisual {
             .data(this.forceLayout.nodes())
             .enter()
             .append("g")
-            .attr("drag-resize-disabled", true)
             .classed(ForceGraph.NodeSelector.className, true)
             .on("mouseover", (node: ForceGraphNode) => {
                 node.isOver = true;
@@ -723,9 +725,9 @@ export class ForceGraph implements IVisual {
                 (<Event>d3.event).stopPropagation();
             });
 
-        if (nodesNum <= ForceGraph.NoAnimationLimit) {
-            this.nodes.call(this.forceLayout.drag);
-        }
+        // if (nodesNum <= ForceGraph.NoAnimationLimit) {
+        //     this.nodes.call(this.forceLayout.drag);
+        // }
 
         // render without animation
         if (!this.settings.animation.show || nodesNum > ForceGraph.NoAnimationLimit) {
@@ -773,7 +775,7 @@ export class ForceGraph implements IVisual {
                 .attr("r", (node: ForceGraphNode) => {
                     return isNaN(node.weight) || node.weight < ForceGraph.MinNodeWeight
                         ? ForceGraph.MinNodeWeight
-                        : node.weight;
+                        : this.settings.nodes.size;
                 })
                 .style("fill", this.settings.nodes.fill)
                 .style("stroke", this.settings.nodes.stroke);
@@ -786,6 +788,8 @@ export class ForceGraph implements IVisual {
                 .attr("dy", ForceGraph.DefaultLabelDy)
                 .style("fill", this.settings.labels.color)
                 .style("font-size", PixelConverter.fromPoint(this.settings.labels.fontSize))
+                // aggiungo il colore di sfondo
+                .style('background-color', this.settings.labels.background)
                 .text((node: ForceGraphNode) => {
                     if (node.name) {
                         if (node.name.length > this.settings.nodes.nameMaxLength) {
@@ -833,7 +837,9 @@ export class ForceGraph implements IVisual {
         first.y = second.y;
         first.px = second.px;
         first.py = second.py;
-        first.weight = second.weight;
+        console.log(first, second)
+        first.weight = second.weight < ForceGraph.MinNodeWeight
+        ? ForceGraph.MinNodeWeight : second.weight ;
     }
 
     private getForceTick(): () => void {

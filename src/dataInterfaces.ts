@@ -37,6 +37,7 @@ export interface ForceGraphNode extends Node {
     name: string;
     image: string;
     adj: { [i: string]: number };
+    size?: number;
     x?: number;
     y?: number;
     isDrag?: boolean;

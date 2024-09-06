@@ -165,6 +165,17 @@
                     "type": {
                         "bool": true
                     }
+                },
+                "background": {
+                    "displayName": "Text Background",
+                    "displayNameKey": "Visual_TextBackground",
+                    "type": {
+                        "fill": {
+                          "solid": {
+                            "color": true
+                          }
+                        }
+                      }
                 }
             }
         },
@@ -187,6 +198,29 @@
                     "displayNameKey": "Visual_Label",
                     "description": "Displays weight on links",
                     "descriptionKey": "Visual_Description_Label"
+                },
+                "styleLink": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "Dotted",
+                                "displayNameKey": "Visual_ForceGraph_Dotted",
+                                "displayName": "Dotted"
+                            },
+                            {
+                                "value": "Dashed",
+                                "displayNameKey": "Visual_ForceGraph_Dashed",
+                                "displayName": "Dashed"
+                            },
+                            {
+                                "value": "Solid",
+                                "displayNameKey": "Visual_Solid",
+                                "displayName": "Solid"
+                            }
+                        ]
+                    },
+                    "displayName": "Style",
+                    "displayNameKey": "Visual_Style"
                 },
                 "colorLink": {
                     "type": {
@@ -243,6 +277,13 @@
             "displayName": "Nodes",
             "displayNameKey": "Visual_Nodes",
             "properties": {
+                "size": {
+                    "type": {
+                        "numeric": true
+                    },
+                    "displayName": "Size",
+                    "displayNameKey": "Visual_Node_Size"
+                },
                 "displayImage": {
                     "type": {
                         "bool": true

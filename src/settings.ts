@@ -36,14 +36,18 @@ export class ForceGraphSettings extends DataViewObjectsParser {
 }
 
 export class Animation {
-    public show: boolean = true;
+    // cambiato visualizzazione animazione a false
+    public show: boolean = false;
 }
 
 export class LabelsSettings {
     public show: boolean = true;
-    public color: string = "#777777";
+    public color: string = "#0a0a0a";
+    // cambiato colore label iniziale a nero
     public fontSize: number = 9;
     public allowIntersection: boolean = false;
+    public background: string = "#cccaca";
+    // aggiunto background label colore iniziale grigino
 }
 
 export class LinksSettings {
@@ -53,12 +57,19 @@ export class LinksSettings {
     public thickenLink: boolean = true;
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
+    public styleLink: StyleColorType = StyleColorType.Solid;
 }
 
 export enum LinkColorType {
     ByWeight = <any>"By Weight",
     ByLinkType = <any>"By Link Type",
     Interactive = <any>"Interactive"
+}
+
+export enum StyleColorType {
+    Dotted = <any>"Dotted",
+    Dashed = <any>"Dasheds",
+    Solid = <any>"Solid"
 }
 
 export class NodesSettings {
@@ -70,6 +81,7 @@ export class NodesSettings {
     public highlightReachableLinks: boolean = false;
     public fill: string = "#cccccc";
     public stroke: string = "#ffffff";
+    public size: number = 10;
 }
 
 export class SizeSettings {
