@@ -647,7 +647,7 @@ export class ForceGraph implements IVisual {
                     return this.getLinkColor(link, colorPalette, colorHelper);
                 }
             })
-            .style('border-style', this.settings.links.styleLink)
+            .style('stroke-dasharray', this.settings.links.styleLink)
             .on("mouseover", () => {
 
                 return this.fadePath(

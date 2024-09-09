@@ -203,19 +203,19 @@
                     "type": {
                         "enumeration": [
                             {
-                                "value": "Dotted",
+                                "value": "unset",
+                                "displayNameKey": "Visual_Solid",
+                                "displayName": "Solid"
+                            },
+                            {
+                                "value": "5,5",
                                 "displayNameKey": "Visual_ForceGraph_Dotted",
                                 "displayName": "Dotted"
                             },
                             {
-                                "value": "Dashed",
+                                "value": "10,10",
                                 "displayNameKey": "Visual_ForceGraph_Dashed",
                                 "displayName": "Dashed"
-                            },
-                            {
-                                "value": "Solid",
-                                "displayNameKey": "Visual_Solid",
-                                "displayName": "Solid"
                             }
                         ]
                     },
