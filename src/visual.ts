@@ -790,13 +790,14 @@ export class ForceGraph implements IVisual {
                     const properties = {
                         fontFamily: ForceGraph.LabelsFontFamily,
                         fontSize: PixelConverter.fromPoint(this.settings.labels.fontSize),
-                        text: n.name
+                        text: n.name.length > this.settings.nodes.nameMaxLength ?
+                        n.name.substring(0, this.settings.nodes.nameMaxLength) + '...' : n.name
                     }
 
                     const estimatedHeight = textMeasurementService.estimateSvgTextHeight(properties);
                     const estimatedWidth = textMeasurementService.measureSvgTextWidth(properties);
-                    rect[i].setAttribute("height", estimatedHeight.toString())
-                    rect[i].setAttribute("width", estimatedWidth.toString())
+                    rect[i].setAttribute("height", estimatedHeight.toString());
+                    rect[i].setAttribute("width", estimatedWidth.toString());
             })
             
             this.nodes.append("text")
@@ -807,7 +808,7 @@ export class ForceGraph implements IVisual {
                 .text((node: ForceGraphNode) => {
                     if (node.name) {
                         if (node.name.length > this.settings.nodes.nameMaxLength) {
-                            return node.name.substr(0, this.settings.nodes.nameMaxLength);
+                            return node.name.substring(0, this.settings.nodes.nameMaxLength) + '...';
                         } else {
                             return node.name;
                         }
