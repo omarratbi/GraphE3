@@ -772,11 +772,7 @@ export class ForceGraph implements IVisual {
         } else {
             this.nodes
                 .append("circle")
-                .attr("r", (node: ForceGraphNode) => {
-                    return isNaN(node.weight) || node.weight < ForceGraph.MinNodeWeight
-                        ? ForceGraph.MinNodeWeight
-                        : this.settings.nodes.size;
-                })
+                .attr("r", this.settings.nodes.size)
                 .style("fill", this.settings.nodes.fill)
                 .style("stroke", this.settings.nodes.stroke);
         }
@@ -837,9 +833,9 @@ export class ForceGraph implements IVisual {
         first.y = second.y;
         first.px = second.px;
         first.py = second.py;
-        console.log(first, second)
-        first.weight = second.weight < ForceGraph.MinNodeWeight
-        ? ForceGraph.MinNodeWeight : second.weight ;
+        first.weight = this.settings.nodes.size < ForceGraph.MinNodeWeight
+        ? ForceGraph.MinNodeWeight : this.settings.nodes.size > ForceGraph.MaxNodeWeight
+        ? ForceGraph.MaxNodeWeight : this.settings.nodes.size ;
     }
 
     private getForceTick(): () => void {
@@ -1069,6 +1065,7 @@ export class ForceGraph implements IVisual {
             || this.data.linkedByName[secondNode.name + "," + firstNode.name]
             || firstNode.name === secondNode.name;
     }
+
 
     public destroy(): void {
         this.container.selectAll("*")
