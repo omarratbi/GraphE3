@@ -102,7 +102,7 @@ import { ColorHelper } from "powerbi-visuals-utils-colorutils";
 import { ForceGraphColumns } from "./columns";
 import { ForceGraphSettings, LinkColorType } from "./settings";
 import { ForceGraphTooltipsFactory } from "./tooltipsFactory";
-import { ForceGraphData, ForceGraphNode, ForceGraphNodes, ForceGraphLink, LinkedByName, ITextRect } from "./dataInterfaces";
+import { ForceGraphData, ForceGraphNode, ForceGraphNodes, ForceGraphLink, LinkedByName, ITextRect, ForceGraphText } from "./dataInterfaces";
 
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -153,7 +153,7 @@ export class ForceGraph implements IVisual {
     private static DefaultLinkFillColor: string = "#000";
     private static LinkTextAnchor: string = "middle";
     private static DefaultLabelX: number = 12;
-    private static DefaultLabelDy: string = ".35em";
+    private static DefaultLabelDy: string = "1em";
     private static DefaultLabelText: string = "";
     private static ResolutionFactor: number = 20;
     private static ResolutionFactorBoundByBox: number = 0.9;
@@ -779,13 +779,31 @@ export class ForceGraph implements IVisual {
 
         // add the text
         if (this.settings.labels.show) {
+            this.nodes.append('rect')
+                .attr("x", ForceGraph.DefaultLabelX)
+                .attr("dy","0")
+                .style("fill", this.settings.labels.background)
+
+            const rect = document.querySelectorAll('rect');
+            
+            this.nodes.each((n, i) => {
+                    const properties = {
+                        fontFamily: ForceGraph.LabelsFontFamily,
+                        fontSize: PixelConverter.fromPoint(this.settings.labels.fontSize),
+                        text: n.name
+                    }
+
+                    const estimatedHeight = textMeasurementService.estimateSvgTextHeight(properties);
+                    const estimatedWidth = textMeasurementService.measureSvgTextWidth(properties);
+                    rect[i].setAttribute("height", estimatedHeight.toString())
+                    rect[i].setAttribute("width", estimatedWidth.toString())
+            })
+            
             this.nodes.append("text")
                 .attr("x", ForceGraph.DefaultLabelX)
                 .attr("dy", ForceGraph.DefaultLabelDy)
                 .style("fill", this.settings.labels.color)
                 .style("font-size", PixelConverter.fromPoint(this.settings.labels.fontSize))
-                // aggiungo il colore di sfondo
-                .style('background-color', this.settings.labels.background)
                 .text((node: ForceGraphNode) => {
                     if (node.name) {
                         if (node.name.length > this.settings.nodes.nameMaxLength) {
@@ -796,9 +814,10 @@ export class ForceGraph implements IVisual {
                     } else {
                         return ForceGraph.DefaultLabelText;
                     }
-                });
+            });
         }
     }
+
     private getImage(image: string): string {
         return `${this.settings.nodes.imageUrl}${image}${this.settings.nodes.imageExt}`;
     }
@@ -840,10 +859,10 @@ export class ForceGraph implements IVisual {
 
     private getForceTick(): () => void {
         const viewport: IViewport = this.viewportIn;
-        const properties: TextProperties = {
+        const properties: TextProperties | ForceGraphText = {
             fontFamily: ForceGraph.LabelsFontFamily,
             fontSize: PixelConverter.fromPoint(this.settings.labels.fontSize),
-            text: this.data.formatter.format("")
+            text: this.data.formatter.format(""),
         };
 
         const showArrow: boolean = this.settings && this.settings.links && this.settings.links.showArrow;

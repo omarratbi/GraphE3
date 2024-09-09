@@ -32,6 +32,7 @@ import { valueFormatter as vf } from "powerbi-visuals-utils-formattingutils";
 import IValueFormatter = vf.IValueFormatter;
 
 import { ForceGraphSettings } from "./settings";
+import { TextProperties } from "powerbi-visuals-utils-formattingutils/lib/textMeasurementService";
 
 export interface ForceGraphNode extends Node {
     name: string;
@@ -78,6 +79,10 @@ export interface ForceGraphData {
 
 export interface LinkedByName {
     [linkName: string]: number;
+}
+
+export interface ForceGraphText extends TextProperties {
+    background: string;
 }
 
 
