@@ -42,12 +42,16 @@ export class Animation {
 
 export class LabelsSettings {
     public show: boolean = true;
-    public color: string = "#0a0a0a";
-    // cambiato colore label iniziale a nero
+    //aggiunto font family label iniziale
+    public fontFamily: string = "Segoe UI";
     public fontSize: number = 9;
+    // cambiato colore label iniziale a nero
+    public color: string = "#0a0a0a";
     public allowIntersection: boolean = false;
-    public background: string = "#cccaca";
-    // aggiunto background label colore iniziale grigino
+    // aggiunto background label colore iniziale bianco
+    public background: string = "ffffff";
+    //aggiunto opacità label iniziale a valore max = 100
+    public transparency: number = 100;
 }
 
 export class LinksSettings {

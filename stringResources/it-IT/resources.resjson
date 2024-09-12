@@ -1,14 +1,14 @@
 {
   "Visual_Source": "Origine",
   "Visual_Target": "Destinazione",
-  "Visual_Weight": "Peso",
+  "Visual_LinkWeight": "Peso collegamento",
   "Visual_SourceType": "Tipo di origine",
   "Visual_LinkType": "Tipo di collegamento",
   "Visual_TargetType": "Tipo di destinazione",
   "Visual_Animations": "Animazioni",
   "Visual_Show": "Mostra",
   "Visual_DataLabels": "Etichette dati",
-  "Visual_Fill": "Riempimento",
+  "Visual_Fill": "Colore Carattere",
   "Visual_TextSize": "Dimensioni testo",
   "Visual_Intersection": "Intersezione",
   "Visual_TextBackground": "Sfondo"
@@ -39,5 +39,7 @@
   "Visual_ForceGraph_MaxNameLength": "Lunghezza massima del nome",
   "Visual_ForceGraph_HighlightLinks": "Evidenzia tutti i collegamenti raggiungibili",
   "Visual_Description_Label": "Visualizza peso nei collegamenti",
-  "Visual_Description_Thickness": "Lo spessore dei collegamenti rappresenta il peso"
+  "Visual_Description_Thickness": "Lo spessore dei collegamenti rappresenta il peso",
+  "Visual_BackgroundOpacity": "Trasparenza",
+  "Visual_FontFamily": "Tipo Carattere"
 }

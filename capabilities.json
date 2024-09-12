@@ -13,10 +13,10 @@
             "displayName": "Target"
         },
         {
-            "displayNameKey": "Visual_Weight",
+            "displayNameKey": "Visual_LinkWeight",
             "name": "Weight",
             "kind": "Measure",
-            "displayName": "Weight"
+            "displayName": "Link Weight"
         },
         {
             "displayNameKey": "Visual_LinkType",
@@ -139,6 +139,24 @@
                         "bool": true
                     }
                 },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    },
+                    "displayName": "Font Family",
+                    "displayNameKey": "Visual_FontFamily"
+                },
+                "fontSize": {
+                    "displayName": "Text Size",
+                    "displayNameKey": "Visual_TextSize",
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
                 "color": {
                     "displayName": "Fill",
                     "displayNameKey": "Visual_Fill",
@@ -147,15 +165,6 @@
                             "solid": {
                                 "color": true
                             }
-                        }
-                    }
-                },
-                "fontSize": {
-                    "displayName": "Text Size",
-                    "displayNameKey": "Visual_TextSize",
-                    "type": {
-                        "formatting": {
-                            "fontSize": true
                         }
                     }
                 },
@@ -171,11 +180,18 @@
                     "displayNameKey": "Visual_TextBackground",
                     "type": {
                         "fill": {
-                          "solid": {
-                            "color": true
-                          }
+                            "solid": {
+                                "color": true
+                            }
                         }
-                      }
+                    }
+                },
+                "transparency": {
+                    "type": {
+                        "numeric": true
+                    },
+                    "displayName": "Transparency",
+                    "displayNameKey": "Visual_BackgroundTransparency"
                 }
             }
         },

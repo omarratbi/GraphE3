@@ -128,7 +128,7 @@ export class ForceGraph implements IVisual {
 
     private static ImagePosition: number = -12;
     private static MinNodeWeight: number = 5;
-    private static MaxNodeWeight: number = 5;
+    private static MaxNodeWeight: number = 20;
     private static MinCharge: number = -100;
     private static MaxCharge: number = -0.1;
     private static MinDecimalPlaces: number = 0;
@@ -162,6 +162,7 @@ export class ForceGraph implements IVisual {
     private static LinkLabelSelector: ClassAndSelector = createClassAndSelector("linklabel");
     private static NodeSelector: ClassAndSelector = createClassAndSelector("node");
     private static NoAnimationLimit: number = 200;
+    public static MaxTransparency: number = 100;
 
     private selectionManager: ISelectionManager;
     private host: IVisualHost;
@@ -248,6 +249,7 @@ export class ForceGraph implements IVisual {
 
         this.forceLayout = d3.layout.force<ForceGraphLink, ForceGraphNode>();
 
+        //Disabilitato animazione drag 
         // this.forceLayout.drag()
         //     .on("dragstart", ((d: ForceGraphNode) => {
         //         this.forceLayout.stop();
@@ -667,8 +669,8 @@ export class ForceGraph implements IVisual {
         this.tooltipServiceWrapper.addTooltip(this.paths, (eventArgs: TooltipEventArgs<ForceGraphLink>) => {
             return eventArgs.data.tooltipInfo;
         });
-        // aggiunta tooltip
 
+        // aggiunta tooltip
         if (this.settings.links.showLabel) {
             let linklabelholderUpdate: d3.selection.Update<ForceGraphLink> = svg
                 .selectAll(ForceGraph.LinkLabelHolderSelector.selectorName)
@@ -779,30 +781,41 @@ export class ForceGraph implements IVisual {
 
         // add the text
         if (this.settings.labels.show) {
+
             this.nodes.append('rect')
                 .attr("x", ForceGraph.DefaultLabelX)
-                .attr("dy","0")
+                .attr("dy", "0")
+                .style("opacity", ((ForceGraph.MaxTransparency - this.settings.labels.transparency) / ForceGraph.MaxTransparency))
                 .style("fill", this.settings.labels.background)
-
+            if (this.settings.labels.background) {
+                this.nodes.append('rect')
+                    .style("fill", this.settings.labels.background)
+            } else {
+                this.nodes.append('rect')
+                    .style("fill", "#ffffff")
+            }
             const rect = document.querySelectorAll('rect');
-            
-            this.nodes.each((n, i) => {
-                    const properties = {
-                        fontFamily: ForceGraph.LabelsFontFamily,
-                        fontSize: PixelConverter.fromPoint(this.settings.labels.fontSize),
-                        text: n.name.length > this.settings.nodes.nameMaxLength ?
-                        n.name.substring(0, this.settings.nodes.nameMaxLength) + '...' : n.name
-                    }
 
-                    const estimatedHeight = textMeasurementService.estimateSvgTextHeight(properties);
-                    const estimatedWidth = textMeasurementService.measureSvgTextWidth(properties);
-                    rect[i].setAttribute("height", estimatedHeight.toString());
-                    rect[i].setAttribute("width", estimatedWidth.toString());
+            this.nodes.each((n, i) => {
+                const properties = {
+                    fontFamily: this.settings.labels.fontFamily,
+                    fontSize: PixelConverter.fromPoint(this.settings.labels.fontSize),
+                    text: n.name.length > this.settings.nodes.nameMaxLength ?
+                        n.name.substring(0, this.settings.nodes.nameMaxLength) + '...' : n.name
+                }
+
+                const estimatedHeight = textMeasurementService.estimateSvgTextHeight(properties);
+                const estimatedWidth = textMeasurementService.measureSvgTextWidth(properties);
+                rect[i].setAttribute("height", estimatedHeight.toString());
+                rect[i].setAttribute("width", estimatedWidth.toString());
+                rect[i].setAttribute("ry", "2.5");
+                rect[i].setAttribute("rx", "2.5");
             })
-            
+
             this.nodes.append("text")
                 .attr("x", ForceGraph.DefaultLabelX)
                 .attr("dy", ForceGraph.DefaultLabelDy)
+                .style("font-family", this.settings.labels.fontFamily)
                 .style("fill", this.settings.labels.color)
                 .style("font-size", PixelConverter.fromPoint(this.settings.labels.fontSize))
                 .text((node: ForceGraphNode) => {
@@ -815,7 +828,7 @@ export class ForceGraph implements IVisual {
                     } else {
                         return ForceGraph.DefaultLabelText;
                     }
-            });
+                });
         }
     }
 
@@ -853,9 +866,9 @@ export class ForceGraph implements IVisual {
         first.y = second.y;
         first.px = second.px;
         first.py = second.py;
-        first.weight = this.settings.nodes.size < ForceGraph.MinNodeWeight
-        ? ForceGraph.MinNodeWeight : this.settings.nodes.size > ForceGraph.MaxNodeWeight
-        ? ForceGraph.MaxNodeWeight : this.settings.nodes.size ;
+        first.size = this.settings.nodes.size < ForceGraph.MinNodeWeight
+            ? ForceGraph.MinNodeWeight : this.settings.nodes.size > ForceGraph.MaxNodeWeight
+                ? ForceGraph.MaxNodeWeight : this.settings.nodes.size;
     }
 
     private getForceTick(): () => void {

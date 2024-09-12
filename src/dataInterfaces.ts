@@ -83,7 +83,6 @@ export interface LinkedByName {
 
 export interface ForceGraphText extends TextProperties {
     background: string;
+    transparency: number;
+    fontFamily: string;
 }
-
-
-
