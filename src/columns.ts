@@ -74,4 +74,7 @@ export class ForceGraphColumns<T> {
     public LinkType: T = null;
     public SourceType: T = null;
     public TargetType: T = null;
+    //nuovi campi per la gestione dei nodi
+    public NodeWeight: T = null;
+    public NodeType: T = null;
 }

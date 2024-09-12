@@ -25,6 +25,18 @@
             "displayName": "Link Type"
         },
         {
+            "displayNameKey": "Visual_NodeWeight",
+            "name": "NodeWeight",
+            "kind": "Measure",
+            "displayName": "Node Weight"
+        },
+        {
+            "displayNameKey": "Visual_NodeType",
+            "name": "NodeType",
+            "kind": "Grouping",
+            "displayName": "Node Type"
+        },
+        {
             "displayNameKey": "Visual_SourceType",
             "name": "SourceType",
             "kind": "Grouping",
