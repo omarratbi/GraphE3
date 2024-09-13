@@ -63,6 +63,7 @@ export class LinksSettings {
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
     public styleLink: StyleColorType = StyleColorType.Solid;
+    public transparency: number = 0;
 }
 
 export enum LinkColorType {
@@ -87,6 +88,7 @@ export class NodesSettings {
     public fill: string = "#cccccc";
     public stroke: string = "#ffffff";
     public size: number = 10;
+    public transparency: number = 0;
 }
 
 export class SizeSettings {
