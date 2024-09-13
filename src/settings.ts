@@ -49,7 +49,7 @@ export class LabelsSettings {
     public color: string = "#0a0a0a";
     public allowIntersection: boolean = false;
     // aggiunto background label colore iniziale bianco
-    public background: string = "ffffff";
+    public background: string = "#ffffff";
     //aggiunto opacità label iniziale a valore max = 100
     public transparency: number = 100;
 }

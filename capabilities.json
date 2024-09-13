@@ -14,7 +14,7 @@
         },
         {
             "displayNameKey": "Visual_LinkWeight",
-            "name": "Weight",
+            "name": "LinkWeight",
             "kind": "Measure",
             "displayName": "Link Weight"
         },
@@ -305,24 +305,6 @@
             "displayName": "Nodes",
             "displayNameKey": "Visual_Nodes",
             "properties": {
-                "size": {
-                    "type": {
-                        "numeric": true
-                    },
-                    "displayName": "Size",
-                    "displayNameKey": "Visual_Node_Size"
-                },
-                "fill": {
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    },
-                    "displayName": "Color",
-                    "displayNameKey": "Visual_Node_Color"
-                },
                 "displayImage": {
                     "type": {
                         "bool": true
@@ -364,6 +346,24 @@
                     },
                     "displayName": "Highlight all reachable links",
                     "displayNameKey": "Visual_ForceGraph_HighlightLinks"
+                },
+                "fill": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    },
+                    "displayName": "Color",
+                    "displayNameKey": "Visual_Node_Color"
+                },
+                "size": {
+                    "type": {
+                        "numeric": true
+                    },
+                    "displayName": "Size",
+                    "displayNameKey": "Visual_Node_Size"
                 }
             }
         },

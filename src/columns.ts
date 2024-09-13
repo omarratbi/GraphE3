@@ -70,7 +70,7 @@ export class ForceGraphColumns<T> {
 
     public Source: T = null;
     public Target: T = null;
-    public Weight: T = null;
+    public LinkWeight: T = null;
     public LinkType: T = null;
     public SourceType: T = null;
     public TargetType: T = null;
