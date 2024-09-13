@@ -649,7 +649,7 @@ export class ForceGraph implements IVisual {
                     return  this.settings.links.stroke;
                 }
             })
-            .style('stroke-dasharray', this.settings.links.styleLink)
+            .style('stroke-dasharray', this.settings.links.LinkStyle)
             .style("opacity", ((ForceGraph.MaxTransparency - this.settings.links.transparency) / ForceGraph.MaxTransparency))
             .on("mouseover", () => {
 

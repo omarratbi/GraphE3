@@ -392,8 +392,8 @@
                             }
                         ]
                     },
-                    "displayName": "Color",
-                    "displayNameKey": "Visual_Color"
+                    "displayName": "Color Node",
+                    "displayNameKey": "Visual_ColorNode"
                 },
                 "fill": {
                     "type": {

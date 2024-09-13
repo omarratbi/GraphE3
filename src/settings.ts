@@ -64,7 +64,7 @@ export class LinksSettings {
     public thickenLink: boolean = true;
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
-    public styleLink: StyleColorType = StyleColorType.Solid;
+    public LinkStyle: LinkStyleOption = LinkStyleOption.Solid;
 }
 
 export enum LinkColorType {
@@ -79,7 +79,7 @@ export enum NodeColorType {
     Interactive = <any>"Interactive"
 }
 
-export enum StyleColorType {
+export enum LinkStyleOption {
     Dotted = <any>"Dotted",
     Dashed = <any>"Dasheds",
     Solid = <any>"Solid"
@@ -92,7 +92,7 @@ export class NodesSettings {
     public imageExt: string = ".png";
     public nameMaxLength: number = 3;
     public highlightReachableLinks: boolean = false;
-    public colorLink: NodeColorType = NodeColorType.Interactive;
+    public colorNode: NodeColorType = NodeColorType.Interactive;
     public fill: string = "#cccccc";
     public stroke: string = "#ffffff";
     public size: number = 10;
