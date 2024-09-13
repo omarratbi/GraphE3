@@ -354,7 +354,7 @@
                     "displayName": "Highlight all reachable links",
                     "displayNameKey": "Visual_ForceGraph_HighlightLinks"
                 },
-                "colorLink": {
+                "colorNode": {
                     "type": {
                         "enumeration": [
                             {
