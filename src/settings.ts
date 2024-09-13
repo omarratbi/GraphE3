@@ -47,6 +47,7 @@ export class LabelsSettings {
     public fontSize: number = 9;
     // cambiato colore label iniziale a nero
     public color: string = "#0a0a0a";
+    public allowEllipsis: boolean = false;
     public allowIntersection: boolean = false;
     // aggiunto background label colore iniziale bianco
     public background: string = "#ffffff";
@@ -58,11 +59,12 @@ export class LinksSettings {
     public showArrow: boolean = false;
     public showLabel: boolean = false;
     public colorLink: LinkColorType = LinkColorType.Interactive;
+    public stroke: string = "#0a0a0a"
+    public transparency: number = 0;
     public thickenLink: boolean = true;
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
     public styleLink: StyleColorType = StyleColorType.Solid;
-    public transparency: number = 0;
 }
 
 export enum LinkColorType {
@@ -88,7 +90,7 @@ export class NodesSettings {
     public defaultImage: string = "Home";
     public imageUrl: string = "";
     public imageExt: string = ".png";
-    public nameMaxLength: number = 10;
+    public nameMaxLength: number = 3;
     public highlightReachableLinks: boolean = false;
     public colorLink: NodeColorType = NodeColorType.Interactive;
     public fill: string = "#cccccc";

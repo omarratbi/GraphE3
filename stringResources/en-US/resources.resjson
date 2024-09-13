@@ -24,7 +24,7 @@
 	"Visual_Size": "Size",
 	"Visual_Charge": "Charge",
 	"Visual_BoundByBox": "Bound by box",
-	"Visual_ForceGraph_ByWeight": "By Weight",
+	"Visual_ForceGraph_ByWeight": "By Link Weight",
 	"Visual_ForceGraph_ByLinkType": "By Link Type",
 	"Visual_ForceGraph_Links": "Links",
 	"Visual_ForceGraph_Thickness": "Thickness",
