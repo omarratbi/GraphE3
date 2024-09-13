@@ -59,11 +59,12 @@ export class LinksSettings {
     public showArrow: boolean = false;
     public showLabel: boolean = false;
     public colorLink: LinkColorType = LinkColorType.Interactive;
+    public stroke: string = "#0a0a0a"
+    public transparency: number = 0;
     public thickenLink: boolean = true;
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
     public styleLink: StyleColorType = StyleColorType.Solid;
-    public transparency: number = 0;
 }
 
 export enum LinkColorType {

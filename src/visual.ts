@@ -642,11 +642,11 @@ export class ForceGraph implements IVisual {
             })
             .classed(ForceGraph.LinkSelector.className, true)
             .style("stroke", (link: ForceGraphLink) => {
-                return this.getLinkColor(link, colorPalette, colorHelper);
+                return this.settings.links.stroke;
             })
             .style("fill", (link: ForceGraphLink) => {
                 if (this.settings.links.showArrow && link.source !== link.target) {
-                    return this.getLinkColor(link, colorPalette, colorHelper);
+                    return  this.settings.links.stroke;
                 }
             })
             .style('stroke-dasharray', this.settings.links.styleLink)
@@ -831,6 +831,22 @@ export class ForceGraph implements IVisual {
                     }
                 });
         }
+    }
+
+    public enumerateObjectInstancesColor(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration {
+        let instances = [];
+        switch (options.objectName) {
+            case 'color':
+                instances.push({
+                    objectName: options.objectName,
+                    properties: {
+                        fill: this.host.colorPalette.getColor("default").value
+                    },
+                    selector: null
+                });
+                break;
+        }
+        return instances;
     }
 
     private getImage(image: string): string {
