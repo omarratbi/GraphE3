@@ -650,6 +650,7 @@ export class ForceGraph implements IVisual {
                 }
             })
             .style('stroke-dasharray', this.settings.links.styleLink)
+            .style("opacity", ((ForceGraph.MaxTransparency - this.settings.links.transparency) / ForceGraph.MaxTransparency))
             .on("mouseover", () => {
 
                 return this.fadePath(
@@ -770,13 +771,15 @@ export class ForceGraph implements IVisual {
 
                     return ForceGraph.DefaultImage;
                 })
-                .attr("title", (node: ForceGraphNode) => node.name);
+                .attr("title", (node: ForceGraphNode) => node.name)
+                .style("opacity", ((ForceGraph.MaxTransparency - this.settings.nodes.transparency) / ForceGraph.MaxTransparency));
         } else {
             this.nodes
                 .append("circle")
                 .attr("r", this.settings.nodes.size > ForceGraph.MaxNodeWeight ? ForceGraph.MaxNodeWeight : this.settings.nodes.size < ForceGraph.MinNodeWeight ? ForceGraph.MinNodeWeight
                     : this.settings.nodes.size)
                 .style("fill", this.settings.nodes.fill)
+                .style("opacity", ((ForceGraph.MaxTransparency - this.settings.nodes.transparency) / ForceGraph.MaxTransparency))
                 .style("stroke", this.settings.nodes.stroke);
         }
 

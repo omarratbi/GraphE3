@@ -298,6 +298,13 @@
                     "type": {
                         "numeric": true
                     }
+                },
+                "transparency": {
+                    "type": {
+                        "numeric": true
+                    },
+                    "displayName": "Transparency",
+                    "displayNameKey": "Visual_BackgroundTransparency"
                 }
             }
         },
@@ -364,6 +371,13 @@
                     },
                     "displayName": "Size",
                     "displayNameKey": "Visual_Node_Size"
+                },
+                "transparency": {
+                    "type": {
+                        "numeric": true
+                    },
+                    "displayName": "Transparency",
+                    "displayNameKey": "Visual_BackgroundTransparency"
                 }
             }
         },
