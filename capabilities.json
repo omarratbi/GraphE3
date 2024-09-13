@@ -180,6 +180,13 @@
                         }
                     }
                 },
+                "allowEllipsis": {
+                    "displayName": "Ellipsis",
+                    "displayNameKey": "Visual_Ellipsis",
+                    "type": {
+                        "bool": true
+                    }
+                },
                 "allowIntersection": {
                     "displayName": "Intersection",
                     "displayNameKey": "Visual_Intersection",

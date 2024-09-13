@@ -47,6 +47,7 @@ export class LabelsSettings {
     public fontSize: number = 9;
     // cambiato colore label iniziale a nero
     public color: string = "#0a0a0a";
+    public allowEllipsis: boolean = false;
     public allowIntersection: boolean = false;
     // aggiunto background label colore iniziale bianco
     public background: string = "#ffffff";
@@ -81,7 +82,7 @@ export class NodesSettings {
     public defaultImage: string = "Home";
     public imageUrl: string = "";
     public imageExt: string = ".png";
-    public nameMaxLength: number = 10;
+    public nameMaxLength: number = 3;
     public highlightReachableLinks: boolean = false;
     public fill: string = "#cccccc";
     public stroke: string = "#ffffff";

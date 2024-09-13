@@ -782,7 +782,6 @@ export class ForceGraph implements IVisual {
 
         // add the text
         if (this.settings.labels.show) {
-
             this.nodes.append('rect')
                 .attr("x", ForceGraph.DefaultLabelX)
                 .attr("dy", "0")
@@ -790,13 +789,16 @@ export class ForceGraph implements IVisual {
                 .style("fill", this.settings.labels.background)
 
             const rect = document.querySelectorAll('rect');
-
             this.nodes.each((n, i) => {
+                let text: string;
+                if(this.settings.labels.allowEllipsis === true) {
+                    text = n.name.length > this.settings.nodes.nameMaxLength ?
+                    n.name.substring(0, this.settings.nodes.nameMaxLength) + '...' : n.name;
+                } else text = n.name
                 const properties = {
                     fontFamily: this.settings.labels.fontFamily,
                     fontSize: PixelConverter.fromPoint(this.settings.labels.fontSize),
-                    text: n.name.length > this.settings.nodes.nameMaxLength ?
-                        n.name.substring(0, this.settings.nodes.nameMaxLength) + '...' : n.name
+                    text: text
                 }
 
                 const estimatedHeight = textMeasurementService.estimateSvgTextHeight(properties);
@@ -815,8 +817,9 @@ export class ForceGraph implements IVisual {
                 .style("font-size", PixelConverter.fromPoint(this.settings.labels.fontSize))
                 .text((node: ForceGraphNode) => {
                     if (node.name) {
-                        if (node.name.length > this.settings.nodes.nameMaxLength) {
-                            return node.name.substring(0, this.settings.nodes.nameMaxLength) + '...';
+                        if(this.settings.labels.allowEllipsis) {
+                            return node.name.length > this.settings.nodes.nameMaxLength ?
+                            node.name.substring(0, this.settings.nodes.nameMaxLength) + '...' : node.name
                         } else {
                             return node.name;
                         }
@@ -864,7 +867,6 @@ export class ForceGraph implements IVisual {
         first.size = this.settings.nodes.size < ForceGraph.MinNodeWeight
             ? ForceGraph.MinNodeWeight : this.settings.nodes.size > ForceGraph.MaxNodeWeight
                 ? ForceGraph.MaxNodeWeight : this.settings.nodes.size;
-        console.log(first, second)
     }
 
     private getForceTick(): () => void {
