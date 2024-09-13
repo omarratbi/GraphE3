@@ -71,6 +71,12 @@ export enum LinkColorType {
     Interactive = <any>"Interactive"
 }
 
+export enum NodeColorType {
+    ByWeight = <any>"By Weight",
+    ByLinkType = <any>"By Link Type",
+    Interactive = <any>"Interactive"
+}
+
 export enum StyleColorType {
     Dotted = <any>"Dotted",
     Dashed = <any>"Dasheds",
@@ -84,6 +90,7 @@ export class NodesSettings {
     public imageExt: string = ".png";
     public nameMaxLength: number = 10;
     public highlightReachableLinks: boolean = false;
+    public colorLink: NodeColorType = NodeColorType.Interactive;
     public fill: string = "#cccccc";
     public stroke: string = "#ffffff";
     public size: number = 10;

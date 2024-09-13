@@ -41,5 +41,7 @@
   "Visual_Description_Label": "Visualizza peso nei collegamenti",
   "Visual_Description_Thickness": "Lo spessore dei collegamenti rappresenta il peso",
   "Visual_BackgroundOpacity": "Trasparenza",
-  "Visual_FontFamily": "Tipo Carattere"
+  "Visual_FontFamily": "Tipo Carattere",
+  "Visual_ForceGraph_ByNodeWeight": "Per peso nodo",
+  "Visual_ForceGraph_ByNodeType": "Per tipo di nodo"
 }

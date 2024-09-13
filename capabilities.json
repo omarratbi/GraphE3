@@ -354,6 +354,29 @@
                     "displayName": "Highlight all reachable links",
                     "displayNameKey": "Visual_ForceGraph_HighlightLinks"
                 },
+                "colorLink": {
+                    "type": {
+                        "enumeration": [
+                            {
+                                "value": "By Node Weight",
+                                "displayNameKey": "Visual_ForceGraph_ByNodeWeight",
+                                "displayName": "By Node Weight"
+                            },
+                            {
+                                "value": "By Node Type",
+                                "displayNameKey": "Visual_ForceGraph_ByNodeType",
+                                "displayName": "By Node Type"
+                            },
+                            {
+                                "value": "Interactive",
+                                "displayNameKey": "Visual_Interactive",
+                                "displayName": "Interactive"
+                            }
+                        ]
+                    },
+                    "displayName": "Color",
+                    "displayNameKey": "Visual_Color"
+                },
                 "fill": {
                     "type": {
                         "fill": {
