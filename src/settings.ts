@@ -90,7 +90,7 @@ export class NodesSettings {
     public defaultImage: string = "Home";
     public imageUrl: string = "";
     public imageExt: string = ".png";
-    public nameMaxLength: number = 3;
+    public nameMaxLength: number = 10;
     public highlightReachableLinks: boolean = false;
     public colorNode: NodeColorType = NodeColorType.Interactive;
     public fill: string = "#cccccc";
