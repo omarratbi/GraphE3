@@ -727,6 +727,7 @@ export class ForceGraph implements IVisual {
 
                 (<Event>d3.event).stopPropagation();
             });
+        console.log(this.forceLayout.nodes())
 
         // if (nodesNum <= ForceGraph.NoAnimationLimit) {
         //     this.nodes.call(this.forceLayout.drag);
@@ -885,7 +886,7 @@ export class ForceGraph implements IVisual {
         first.py = second.py;
         first.size = this.settings.nodes.size < ForceGraph.MinNodeWeight
             ? ForceGraph.MinNodeWeight : this.settings.nodes.size > ForceGraph.MaxNodeWeight
-                ? ForceGraph.MaxNodeWeight : this.settings.nodes.size;
+                ? ForceGraph.MaxNodeWeight : this.Normalizazione(ForceGraph.MinNodeWeight, ForceGraph.MaxNodeWeight, Math.min(), Math.max(), this.settings.nodes.size);
     }
 
     private getForceTick(): () => void {
@@ -1120,5 +1121,14 @@ export class ForceGraph implements IVisual {
     public destroy(): void {
         this.container.selectAll("*")
             .remove();
+    }
+
+    public Normalizazione(minDefaultForceGraph: number, maxDefaultForceGraph: number, minNode: number, maxNode: number, currentNodeValue): number{
+        // minNode = a
+        // maxNode = b
+        // minDefaultForceGraph = c 
+        // maxDefaultForceGraph = d
+        // currentNodeValue = x
+        return minDefaultForceGraph + (((currentNodeValue - minNode) * (maxDefaultForceGraph - minDefaultForceGraph))/(maxNode - minNode));
     }
 }
