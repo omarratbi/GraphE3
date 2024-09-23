@@ -64,7 +64,7 @@ export class LinksSettings {
     public thickenLink: boolean = true;
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
-    public LinkStyle: LinkStyleOption = LinkStyleOption.Solid;
+    public linkStyle: LinkStyleOption = LinkStyleOption.Solid;
 }
 
 export enum LinkColorType {
