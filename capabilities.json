@@ -291,6 +291,16 @@
                     "displayName": "Default Color",
                     "displayNameKey": "Visual_Node_DefaultColor"
                 },
+                "linkColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    },
+                    "displayName": "link Color"
+                },
                 "thickenLink": {
                     "type": {
                         "bool": true

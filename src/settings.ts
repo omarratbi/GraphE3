@@ -33,6 +33,10 @@ export class ForceGraphSettings extends DataViewObjectsParser {
     public links: LinksSettings = new LinksSettings();
     public nodes: NodesSettings = new NodesSettings();
     public size: SizeSettings = new SizeSettings();
+
+    public static getDefault(): ForceGraphSettings {
+        return new ForceGraphSettings();
+    }
 }
 
 export class Animation {
@@ -65,6 +69,8 @@ export class LinksSettings {
     public displayUnits: number = 0;
     public decimalPlaces: number = null;
     public linkStyle: LinkStyleOption = LinkStyleOption.Solid;
+    public linkColor: string[] = [];
+
 }
 
 export enum LinkColorType {

@@ -80,6 +80,9 @@ import VisualTooltipDataItem = powerbi.extensibility.VisualTooltipDataItem;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
 import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
+import DataViewObjectPropertyIdentifier = powerbi.DataViewObjectPropertyIdentifier;
+import VisualObjectInstance = powerbi.VisualObjectInstance;
+import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 
 import { pixelConverter as PixelConverter } from "powerbi-visuals-utils-typeutils";
@@ -330,11 +333,55 @@ export class ForceGraph implements IVisual {
         return ForceGraph.DefaultLinkColor;
     }
 
-    public enumerateObjectInstances(
-        options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration {
-
-        return ForceGraphSettings.enumerateObjectInstances(this.settings, options);
+    public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration {
+        const instanceEnumeration: VisualObjectInstanceEnumeration =
+            ForceGraphSettings.enumerateObjectInstances(this.settings || ForceGraphSettings.getDefault(), options);
+    
+        if (options.objectName === "links") {
+            this.enumerateLinks(instanceEnumeration);
+        }
+    
+        return instanceEnumeration || [];
     }
+    
+    private enumerateLinks(instanceEnumeration: VisualObjectInstanceEnumeration): void {
+        const links: ForceGraphLink[] = this.data.links;
+    
+        if (!links || links.length === 0) {
+            return;
+        }
+    
+        links.forEach((link: ForceGraphLink, index: number) => {
+            const displayName: string = `Link ${index + 1}`; // Display name in the formatting pane
+            console.log(instanceEnumeration)
+
+            
+    
+            this.addAnInstanceToEnumeration(instanceEnumeration, {
+                displayName: displayName,
+                objectName: "links",
+                selector: {id: `link${index}`},
+                properties: {
+                    stroke: { solid: { color: this.settings.links.stroke || "#000000" } } // Default black if no color
+                }
+            });
+
+           
+        });
+    }
+    
+    private addAnInstanceToEnumeration(instanceEnumeration: VisualObjectInstanceEnumeration, instance: VisualObjectInstance): void {
+        const objectInstanceEnumeration: VisualObjectInstanceEnumerationObject = <VisualObjectInstanceEnumerationObject>instanceEnumeration;
+    
+        if (objectInstanceEnumeration.instances) {
+            objectInstanceEnumeration.instances.push(instance);
+            console.log(this.settings.links)
+        } else {
+            (<VisualObjectInstance[]>instanceEnumeration).push(instance);
+            console.log(this.settings.links)
+        }
+    }
+    
 
     public static converter(
         dataView: DataView,
@@ -467,7 +514,8 @@ export class ForceGraph implements IVisual {
                     ForceGraph.MinWeight),
                 formattedWeight: weight && weightFormatter.format(weight),
                 linkType: linkType || ForceGraph.DefaultLinkType,
-                tooltipInfo: tooltipInfo
+                tooltipInfo: tooltipInfo,
+                color: "#0a0a0a"
             };
 
             if (metadata.LinkType && !linkDataPoints[linkType]) {
@@ -641,8 +689,8 @@ export class ForceGraph implements IVisual {
                     : ForceGraph.DefaultLinkThickness;
             })
             .classed(ForceGraph.LinkSelector.className, true)
-            .style("stroke", (link: ForceGraphLink) => {
-                return this.settings.links.stroke;
+            .style("stroke", (link: ForceGraphLink, i:number) => {
+                return this.settings.links.stroke[i];
             })
             .style("fill", (link: ForceGraphLink) => {
                 if (this.settings.links.showArrow && link.source !== link.target) {
@@ -832,22 +880,6 @@ export class ForceGraph implements IVisual {
                     }
                 });
         }
-    }
-
-    public enumerateObjectInstancesColor(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration {
-        let instances = [];
-        switch (options.objectName) {
-            case 'color':
-                instances.push({
-                    objectName: options.objectName,
-                    properties: {
-                        fill: this.host.colorPalette.getColor("default").value
-                    },
-                    selector: null
-                });
-                break;
-        }
-        return instances;
     }
 
     private getImage(image: string): string {
