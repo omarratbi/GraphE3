@@ -1,7 +1,7 @@
 {
   "Visual_Source": "Origine",
   "Visual_Target": "Destinazione",
-  "Visual_LinkWeight": "Peso collegamento",
+  "Visual_Weight": "Peso collegamento",
   "Visual_SourceType": "Tipo di origine",
   "Visual_LinkType": "Tipo di collegamento",
   "Visual_TargetType": "Tipo di destinazione",
@@ -12,7 +12,7 @@
   "Visual_TextSize": "Dimensioni testo",
   "Visual_Ellipsis": "Ellipsis",
   "Visual_Intersection": "Intersezione",
-  "Visual_TextBackground": "Sfondo"
+  "Visual_TextBackground": "Sfondo",
   "Visual_Arrow": "Freccia",
   "Visual_Label": "Etichetta",
   "Visual_Interactive": "Interattivo",
@@ -29,7 +29,7 @@
   "Visual_Size": "Dimensioni",
   "Visual_Charge": "Addebito",
   "Visual_BoundByBox": "Associato alla casella",
-  "Visual_ForceGraph_ByWeight": "Per peso",
+  "Visual_ForceGraph_ByWeight": "Per peso collegamento",
   "Visual_ForceGraph_ByLinkType": "Per tipo di collegamento",
   "Visual_ForceGraph_Links": "Collegamenti",
   "Visual_ForceGraph_Dotted": "A Puntini",

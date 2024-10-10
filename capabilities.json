@@ -13,8 +13,8 @@
             "displayName": "Target"
         },
         {
-            "displayNameKey": "Visual_LinkWeight",
-            "name": "LinkWeight",
+            "displayNameKey": "Visual_Weight",
+            "name": "Weight",
             "kind": "Measure",
             "displayName": "Link Weight"
         },
@@ -23,18 +23,6 @@
             "name": "LinkType",
             "kind": "Grouping",
             "displayName": "Link Type"
-        },
-        {
-            "displayNameKey": "Visual_NodeWeight",
-            "name": "NodeWeight",
-            "kind": "Measure",
-            "displayName": "Node Weight"
-        },
-        {
-            "displayNameKey": "Visual_NodeType",
-            "name": "NodeType",
-            "kind": "Grouping",
-            "displayName": "Node Type"
         },
         {
             "displayNameKey": "Visual_SourceType",
@@ -261,9 +249,9 @@
                     "type": {
                         "enumeration": [
                             {
-                                "value": "By Link Weight",
-                                "displayNameKey": "Visual_ForceGraph_ByLinkWeight",
-                                "displayName": "By Weight"
+                                "value": "By Weight",
+                                "displayNameKey": "Visual_ForceGraph_ByWeight",
+                                "displayName": "By Link Weight"
                             },
                             {
                                 "value": "By Link Type",
@@ -279,17 +267,6 @@
                     },
                     "displayName": "Color",
                     "displayNameKey": "Visual_Color"
-                },
-                "stroke": {
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    },
-                    "displayName": "Default Color",
-                    "displayNameKey": "Visual_Node_DefaultColor"
                 },
                 "thickenLink": {
                     "type": {
@@ -372,29 +349,6 @@
                     "displayName": "Highlight all reachable links",
                     "displayNameKey": "Visual_ForceGraph_HighlightLinks"
                 },
-                "colorNode": {
-                    "type": {
-                        "enumeration": [
-                            {
-                                "value": "By Node Weight",
-                                "displayNameKey": "Visual_ForceGraph_ByNodeWeight",
-                                "displayName": "By Node Weight"
-                            },
-                            {
-                                "value": "By Node Type",
-                                "displayNameKey": "Visual_ForceGraph_ByNodeType",
-                                "displayName": "By Node Type"
-                            },
-                            {
-                                "value": "Interactive",
-                                "displayNameKey": "Visual_Interactive",
-                                "displayName": "Interactive"
-                            }
-                        ]
-                    },
-                    "displayName": "Color Node",
-                    "displayNameKey": "Visual_ColorNode"
-                },
                 "fill": {
                     "type": {
                         "fill": {
@@ -406,17 +360,11 @@
                     "displayName": "Color",
                     "displayNameKey": "Visual_Node_Color"
                 },
-                "size": {
-                    "type": {
-                        "numeric": true
-                    },
-                    "displayName": "Size",
-                    "displayNameKey": "Visual_Node_Size"
-                },
                 "transparency": {
                     "type": {
                         "numeric": true
                     },
+                    "description": "Permette l'aumento o la diminuzione della trasparenza",
                     "displayName": "Transparency",
                     "displayNameKey": "Visual_BackgroundTransparency"
                 }

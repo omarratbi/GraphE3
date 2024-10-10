@@ -378,19 +378,19 @@ export class ForceGraph implements IVisual {
             sourceTypeCategories: any[] = (categorical.SourceType || { values: [] }).values,
             targetTypeCategories: any[] = (categorical.TargetType || { values: [] }).values,
             linkTypeCategories: any[] = (categorical.LinkType || { values: [] }).values,
-            weightValues: any[] = (categorical.LinkWeight && categorical.LinkWeight[0] || { values: [] }).values;
+            weightValues: any[] = (categorical.Weight && categorical.Weight[0] || { values: [] }).values;
 
         let weightFormatter: IValueFormatter = null;
 
-        if (metadata.LinkWeight) {
+        if (metadata.Weight) {
             let weightValue: number = settings.links.displayUnits;
 
-            if (!weightValue && categorical.LinkWeight && categorical.LinkWeight.length) {
-                weightValue = categorical.LinkWeight[0].maxLocal as number;
+            if (!weightValue && categorical.Weight && categorical.Weight.length) {
+                weightValue = categorical.Weight[0].maxLocal as number;
             }
 
             weightFormatter = valueFormatter.create({
-                format: valueFormatter.getFormatStringByColumn(metadata.LinkWeight, true),
+                format: valueFormatter.getFormatStringByColumn(metadata.Weight, true),
                 precision: settings.links.decimalPlaces,
                 value: weightValue
             });
@@ -461,7 +461,7 @@ export class ForceGraph implements IVisual {
             let link: ForceGraphLink = {
                 source: sourceNode,
                 target: targetNode,
-                weight: Math.max(metadata.LinkWeight
+                weight: Math.max(metadata.Weight
                     ? (weight || ForceGraph.MinWeight)
                     : ForceGraph.MaxWeight,
                     ForceGraph.MinWeight),
@@ -642,11 +642,11 @@ export class ForceGraph implements IVisual {
             })
             .classed(ForceGraph.LinkSelector.className, true)
             .style("stroke", (link: ForceGraphLink) => {
-                return this.settings.links.stroke;
+                return this.getLinkColor(link, colorPalette, colorHelper);
             })
             .style("fill", (link: ForceGraphLink) => {
                 if (this.settings.links.showArrow && link.source !== link.target) {
-                    return  this.settings.links.stroke;
+                    return this.getLinkColor(link, colorPalette, colorHelper);
                 }
             })
             .style('stroke-dasharray', this.settings.links.linkStyle)
@@ -776,8 +776,10 @@ export class ForceGraph implements IVisual {
         } else {
             this.nodes
                 .append("circle")
-                .attr("r", this.settings.nodes.size > ForceGraph.MaxNodeWeight ? ForceGraph.MaxNodeWeight : this.settings.nodes.size < ForceGraph.MinNodeWeight ? ForceGraph.MinNodeWeight
-                    : this.settings.nodes.size)
+                .attr("r", (node: ForceGraphNode) => {
+                    return isNaN(node.weight) || node.weight < ForceGraph.MinNodeWeight
+                        ? ForceGraph.MinNodeWeight
+                        : node.weight;})
                 .style("fill", this.settings.nodes.fill)
                 .style("opacity", ((ForceGraph.MaxTransparency - this.settings.nodes.transparency) / ForceGraph.MaxTransparency))
                 .style("stroke", this.settings.nodes.stroke);
@@ -883,9 +885,7 @@ export class ForceGraph implements IVisual {
         first.y = second.y;
         first.px = second.px;
         first.py = second.py;
-        first.size = this.settings.nodes.size < ForceGraph.MinNodeWeight
-            ? ForceGraph.MinNodeWeight : this.settings.nodes.size > ForceGraph.MaxNodeWeight
-                ? ForceGraph.MaxNodeWeight : this.settings.nodes.size;
+        first.weight = second.weight;
     }
 
     private getForceTick(): () => void {
