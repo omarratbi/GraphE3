@@ -10,7 +10,7 @@
   "Visual_DataLabels": "Etichette dati",
   "Visual_Fill": "Colore Carattere",
   "Visual_TextSize": "Dimensioni testo",
-  "Visual_Ellipsis": "Ellipsis",
+  "Visual_Ellipsis": "Riduzione testo",
   "Visual_Intersection": "Intersezione",
   "Visual_TextBackground": "Sfondo",
   "Visual_Arrow": "Freccia",
@@ -44,5 +44,6 @@
   "Visual_BackgroundOpacity": "Trasparenza",
   "Visual_FontFamily": "Tipo Carattere",
   "Visual_ForceGraph_ByNodeWeight": "Per peso nodo",
-  "Visual_ForceGraph_ByNodeType": "Per tipo di nodo"
+  "Visual_ForceGraph_ByNodeType": "Per tipo di nodo",
+  "Visual_BackgroundTransparency": "Trasparenza"
 }
